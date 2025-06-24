@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BP & Vitals Tracker</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .topbar {
+      text-align: right;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .topbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 15px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      padding: 30px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .header p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+
+    .form-container {
+      padding: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: #fafbfc;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #4facfe;
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.15);
+    }
+
+    input[type="datetime-local"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fafbfc;
+      color: #333;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input[type="datetime-local"]:focus {
+      border-color: #4facfe;
+      background: #fff;
+      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.15);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    a {
+      color: #4facfe;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* Styled vitals table */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    .vitals-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+
+    .vitals-table thead {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: left;
+    }
+
+    .vitals-table th,
+    .vitals-table td {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+
+    .vitals-table tbody tr:nth-child(even) {
+      background-color: #f8f9fb;
+    }
+
+    .vitals-table tbody tr:hover {
+      background-color: #eef1f5;
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .form-row .form-group {
+        margin-bottom: 20px;
+      }
+    }
+      .topbar-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        color: white;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 20px;
+      }
+
+      .auth-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 15px;
+      }
+  </style>
+</head>
+<body>
+  <div class="topbar-flex">
+    <div class="nav-links">
+      <a href="/vitals/dashboard">Add Vitals</a>
+      <a href="/vitals/my-vitals">View Entries</a>
+    </div>
+    <div class="auth-links">
+      {{authLinks}}
+    </div>
+  </div>
+  
+
+  {{content}}
+
+  <canvas id="vitalsChart" height="120"></canvas>
+
+</body>
+</html>
