@@ -20,7 +20,10 @@ module.exports = () => {
             <input type="text" name="blood_pressure" placeholder="Blood Pressure (e.g., 120/80)"><br>
             <input type="number" step="0.1" name="temperature" placeholder="Temperature (°F)"><br>
             <input type="number" step="0.1" name="weight_lbs" placeholder="Weight (lbs)"><br>
-            <button type="submit">Submit</button>
+            <button type="submit" id="submitBtn">
+              <span class="btn-text">➕ Submit</span>
+              <span class="btn-spinner" style="display: none;"></span>
+            </button>
           </form>
         </div>
       </div>
