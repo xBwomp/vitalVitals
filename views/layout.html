@@ -86,7 +86,7 @@
 
     input[type="text"],
     input[type="number"],
-    input[type="datetime-local"],
+    #datetime,
     input[type="date"],
     textarea,
     select {
@@ -251,7 +251,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const dtInput = document.querySelector('input[type="datetime-local"]');
+    const dtInput = document.getElementById('datetime');
     if (dtInput && !dtInput.value) {
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
