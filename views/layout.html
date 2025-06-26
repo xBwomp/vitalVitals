@@ -47,11 +47,11 @@
       max-width: 600px;
       margin: 0 auto;
       padding: 32px;
-      background: rgba(0, 40, 80, 0.9);
+      background: linear-gradient(to left, #00c6ff, #0072ff);
       color: white;
       backdrop-filter: blur(10px);
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
       overflow: hidden;
     }
 
@@ -186,7 +186,14 @@
         font-weight: 600;
         margin-left: 15px;
       }
-        button[type="submit"] {
+
+      .button-container {
+        text-align: right;
+        padding: 16px; /* or use margin-top to add spacing from inputs */
+      }
+
+
+      #submitBtn {
       position: relative;
       overflow: hidden;
       background: linear-gradient(to right, #00c6ff, #0072ff);
@@ -201,12 +208,12 @@
       transition: background 0.3s ease, transform 0.2s ease;
     }
     
-    button[type="submit"]:hover {
+    #submitBtn:hover {
       background: linear-gradient(to right, #0072ff, #00c6ff);
       transform: scale(1.05);
     }
     
-    button[type="submit"]::after {
+    #submitBtn::after {
       content: "";
       position: absolute;
       border-radius: 50%;
@@ -214,6 +221,7 @@
       animation: ripple 0.6s linear;
       background: rgba(255, 255, 255, 0.5);
     }  
+
     @keyframes ripple {
       to {
         transform: scale(4);
@@ -237,6 +245,58 @@
   {{content}}
 
   <canvas id="vitalsChart" height="120"></canvas>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dtInput = document.querySelector('input[type="datetime-local"]');
+    if (dtInput && !dtInput.value) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
+      dtInput.value = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:mm"
+    }
+  });
+</script>
+
+<script>
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function (e) {
+      const btn = this;
+      btn.querySelector('.btn-text').textContent = 'Submitting...';
+      btn.querySelector('.btn-spinner').style.display = 'inline-block';
+
+      // Ripple effect
+      const circle = document.createElement("span");
+      const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+      const radius = diameter / 2;
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - radius}px`;
+      circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - radius}px`;
+      circle.classList.add("ripple");
+      const existing = btn.getElementsByClassName("ripple")[0];
+      if (existing) existing.remove();
+      btn.appendChild(circle);
+    });
+  }
+</script>
+
+<style>
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+  }
+
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+</style>
 
 </body>
 </html>

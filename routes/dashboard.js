@@ -14,16 +14,18 @@ module.exports = () => {
         </div>
         <div class="form-container">
           <form action="/vitals/save" method="POST">
-            <label for="datetime">Date & Time</label>
-            <input id="datetime" type="text" name="date" required><br>
+            <input id="datetime-local" type="text" name="date" required><br>
             <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)"><br>
             <input type="text" name="blood_pressure" placeholder="Blood Pressure (e.g., 120/80)"><br>
             <input type="number" step="0.1" name="temperature" placeholder="Temperature (°F)"><br>
             <input type="number" step="0.1" name="weight_lbs" placeholder="Weight (lbs)"><br>
-            <button type="submit" id="submitBtn">
+
+	    <div class="button-container">
+              <button type="submit" id="submitBtn">
               <span class="btn-text">➕ Submit</span>
               <span class="btn-spinner" style="display: none;"></span>
             </button>
+	   </div>
           </form>
         </div>
       </div>
