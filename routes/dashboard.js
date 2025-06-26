@@ -35,6 +35,17 @@ module.exports = () => {
           dateFormat: "Y-m-d H:i",
         });
       </script>
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dtInput = document.querySelector('input[type="datetime-local"]');
+    if (dtInput && !dtInput.value) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
+      dtInput.value = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:mm"
+    }
+  });
+</script>
+
     `;
     res.send(renderPage(content, req.user));
   });
