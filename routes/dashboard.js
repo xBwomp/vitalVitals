@@ -14,7 +14,7 @@ module.exports = () => {
         </div>
         <div class="form-container">
           <form action="/vitals/save" method="POST">
-            <input id="datetime-local" type="text" name="date" required><br>
+            <input id="datetime" type="text" name="date" required><br>
             <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)"><br>
             <input type="text" name="blood_pressure" placeholder="Blood Pressure (e.g., 120/80)"><br>
             <input type="number" step="0.1" name="temperature" placeholder="Temperature (°F)"><br>
@@ -37,7 +37,7 @@ module.exports = () => {
       </script>
    <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const dtInput = document.querySelector('input[type="datetime-local"]');
+    const dtInput = document.getElementById('datetime');
     if (dtInput && !dtInput.value) {
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
