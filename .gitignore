@@ -1,2 +1,4 @@
+stderr.log
 node_modules/
 .env
+tmp/
