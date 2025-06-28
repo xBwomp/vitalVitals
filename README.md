@@ -1,3 +1,5 @@
+You can start the app with `npm start`.
+=======
 # Vital Vitals
 
 A small Node.js application for recording blood pressure and other health metrics. It allows you to sign in with Google, log your vitals and export them as CSV for your doctor.
