@@ -30,8 +30,25 @@ app.use(session({ secret: 'your_secret', resave: false, saveUninitialized: true 
 app.use(passport.session());
 
 // Routing
-const vitalsRouter = require('./routes/vitals')(db);
-app.use('/vitals', vitalsRouter);
+const homeRouter = require('./routes/home')();
+const authGoogleRouter = require('./routes/authGoogle')();
+const authGoogleCallbackRouter = require('./routes/authGoogleCallback')();
+const logoutRouter = require('./routes/logout')();
+const dashboardRouter = require('./routes/dashboard')();
+const saveRouter = require('./routes/save')(db);
+const myVitalsRouter = require('./routes/myVitals')(db);
+const exportRouter = require('./routes/export')();
+const exportDownloadRouter = require('./routes/exportDownload')(db);
+
+app.use('/vitals', homeRouter);
+app.use('/vitals', authGoogleRouter);
+app.use('/vitals', authGoogleCallbackRouter);
+app.use('/vitals', logoutRouter);
+app.use('/vitals', dashboardRouter);
+app.use('/vitals', saveRouter);
+app.use('/vitals', myVitalsRouter);
+app.use('/vitals', exportRouter);
+app.use('/vitals', exportDownloadRouter);
 
 // Server start
 const PORT = process.env.PORT || 3000;

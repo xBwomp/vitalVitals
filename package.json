@@ -1,14 +1,14 @@
 {
   "name": "vitalvitals",
   "version": "1.0.0",
-  "description": "",
+  "description": "A small Node.js application for recording blood pressure and other health metrics. It allows you to sign in with Google, log your vitals and export them as CSV for your doctor.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jefe",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
@@ -19,5 +19,14 @@
     "express-session": "^1.0",
     "passport-google-oauth20": "^2.0.0",
     "csv-stringify": "^6.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xBwomp/vitalVitals.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xBwomp/vitalVitals/issues"
+  },
+  "homepage": "https://github.com/xBwomp/vitalVitals#readme"
 }

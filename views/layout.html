@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     * {
       margin: 0;
@@ -21,31 +22,95 @@
       padding: 20px;
     }
 
-    .topbar {
-      text-align: right;
+    .topbar-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 20px;
       color: white;
+      flex-wrap: wrap;
     }
 
-    .topbar a {
+    .nav-links a,
+    .auth-links a {
       color: white;
       text-decoration: none;
       font-weight: 600;
+      margin-right: 20px;
+    }
+
+    .auth-links a {
       margin-left: 15px;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+      padding: 20px;
     }
 
     .header {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #eee;
+    }
+
+    .export-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .export-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .table-container {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .header {
+      <!-- background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -->
+      background: linear-gradient(to left, #00c6ff, #0072ff);
       padding: 30px 20px;
       text-align: center;
       color: white;
@@ -64,78 +129,29 @@
 
     .form-container {
       padding: 30px;
+      justify-content: center;
+      align-items: center;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .form-row {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .form-row .form-group {
-      flex: 1;
-      margin-bottom: 0;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-      font-size: 14px;
-    }
-
-    input[type="number"],
-    input[type="date"],
     input[type="text"],
+    input[type="number"],
+    #datetime,
+    input[type="date"],
     textarea,
     select {
       width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e1e5e9;
-      border-radius: 12px;
+      padding: 14px 16px;
       font-size: 16px;
-      transition: all 0.3s ease;
-      background: #fafbfc;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: #4facfe;
-      background: white;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.15);
-    }
-
-    input[type="datetime-local"] {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e1e5e9;
-      border-radius: 12px;
-      font-size: 16px;
-      background: #fafbfc;
-      color: #333;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    input[type="datetime-local"]:focus {
-      border-color: #4facfe;
-      background: #fff;
-      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.15);
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      border-radius: 10px;
       border: none;
+<<<<<<< HEAD
+      background: rgba(255, 255, 255, 0.1);
+      col
+=======
       border-radius: 12px;
       font-size: 18px;
       font-weight: 600;
@@ -194,6 +210,13 @@
       background-color: #eef1f5;
     }
 
+    .no-vitals {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+      padding: 50px 0;
+    }
+
     @media (max-width: 480px) {
       .form-row {
         flex-direction: column;
@@ -226,6 +249,48 @@
         font-weight: 600;
         margin-left: 15px;
       }
+
+      .button-container {
+        text-align: right;
+        padding: 16px; /* or use margin-top to add spacing from inputs */
+      }
+
+
+      #submitBtn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0, 114, 255, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    #submitBtn:hover {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      transform: scale(1.05);
+    }
+    
+    #submitBtn::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background: rgba(255, 255, 255, 0.5);
+    }  
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -243,6 +308,58 @@
   {{content}}
 
   <canvas id="vitalsChart" height="120"></canvas>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dtInput = document.getElementById('datetime');
+    if (dtInput && !dtInput.value) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
+      dtInput.value = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:mm"
+    }
+  });
+</script>
+
+<script>
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function (e) {
+      const btn = this;
+      btn.querySelector('.btn-text').textContent = 'Submitting...';
+      btn.querySelector('.btn-spinner').style.display = 'inline-block';
+
+      // Ripple effect
+      const circle = document.createElement("span");
+      const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+      const radius = diameter / 2;
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - btn.getBoundingClientRect().left - radius}px`;
+      circle.style.top = `${e.clientY - btn.getBoundingClientRect().top - radius}px`;
+      circle.classList.add("ripple");
+      const existing = btn.getElementsByClassName("ripple")[0];
+      if (existing) existing.remove();
+      btn.appendChild(circle);
+    });
+  }
+</script>
+
+<style>
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+  }
+
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+</style>
 
 </body>
 </html>
