@@ -38,7 +38,7 @@ module.exports = (db) => {
 
       let tableBody = '';
       if (results.length === 0) {
-        tableBody = `<tr><td colspan="5" style="text-align:center; color:#888;">No vitals found.</td></tr>`;
+        tableBody = `<tr><td colspan="5" class="no-vitals">No vitals found.</td></tr>`;
       } else {
         const displayResults = results.slice(0, 5);
         tableBody = displayResults.map(row => {
@@ -91,42 +91,47 @@ module.exports = (db) => {
                 {
                   label: 'Heart Rate (bpm)',
                   data: heartRates,
-                  borderColor: 'rgba(255,99,132,1)',
-                  backgroundColor: 'rgba(255,99,132,0.2)',
+                  borderColor: '#ff6b81',
+                  backgroundColor: 'rgba(255, 107, 129, 0.2)',
                   yAxisID: 'y',
-                  spanGaps: true
+                  spanGaps: true,
+                  tension: 0.4
                 },
                 {
                   label: 'Temperature (°F)',
                   data: temperatures,
-                  borderColor: 'rgba(54,162,235,1)',
-                  backgroundColor: 'rgba(54,162,235,0.2)',
+                  borderColor: '#4bc0c0',
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
                   yAxisID: 'y1',
-                  spanGaps: true
+                  spanGaps: true,
+                  tension: 0.4
                 },
                 {
                   label: 'Weight (lbs)',
                   data: weights,
-                  borderColor: 'rgba(255,206,86,1)',
-                  backgroundColor: 'rgba(255,206,86,0.2)',
+                  borderColor: '#ffcd56',
+                  backgroundColor: 'rgba(255, 205, 86, 0.2)',
                   yAxisID: 'y2',
-                  spanGaps: true
+                  spanGaps: true,
+                  tension: 0.4
                 },
                 {
                   label: 'Systolic BP',
                   data: systolic,
-                  borderColor: 'rgba(75,192,192,1)',
-                  backgroundColor: 'rgba(75,192,192,0.2)',
+                  borderColor: '#6c5ce7',
+                  backgroundColor: 'rgba(108, 92, 231, 0.2)',
                   yAxisID: 'y3',
-                  spanGaps: true
+                  spanGaps: true,
+                  tension: 0.4
                 },
                 {
                   label: 'Diastolic BP',
                   data: diastolic,
-                  borderColor: 'rgba(153,102,255,1)',
-                  backgroundColor: 'rgba(153,102,255,0.2)',
+                  borderColor: '#a29bfe',
+                  backgroundColor: 'rgba(162, 155, 254, 0.2)',
                   yAxisID: 'y3',
-                  spanGaps: true
+                  spanGaps: true,
+                  tension: 0.4
                 }
               ]
             },
@@ -151,28 +156,42 @@ module.exports = (db) => {
           <div class="header">
             <h1>📊 Your Vitals</h1>
             <p>Review your previously logged health entries.</p>
-            <a href="/vitals/export" title="Export to CSV/Excel" style="float:right; font-size:1.5em; text-decoration:none;">
-              <span role="img" aria-label="Export">📊</span>
+            <a href="/vitals/export" title="Export to CSV/Excel" class="export-link">
+              <span role="img" aria-label="Export">📄</span>
             </a>
           </div>
-          <div style="margin-bottom: 24px;">
-            <canvas id="vitalsChart" height="120"></canvas>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Vitals Chart</h2>
+            </div>
+            <div class="card-body">
+              <canvas id="vitalsChart" height="150"></canvas>
+            </div>
           </div>
-          <div class="table-container" style="max-height: 350px; overflow-y: auto;">
-            <table class="vitals-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Heart Rate</th>
-                  <th>Blood Pressure</th>
-                  <th>Temperature</th>
-                  <th>Weight</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${tableBody}
-              </tbody>
-            </table>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Recent Entries</h2>
+            </div>
+            <div class="card-body">
+              <div class="table-container">
+                <table class="vitals-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Heart Rate</th>
+                      <th>Blood Pressure</th>
+                      <th>Temperature</th>
+                      <th>Weight</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${tableBody}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         ${chartScript}

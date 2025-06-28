@@ -44,15 +44,68 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 32px;
-      background: linear-gradient(to left, #00c6ff, #0072ff);
-      color: white;
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #eee;
+    }
+
+    .export-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .export-link:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .table-container {
+      max-height: 400px;
+      overflow-y: auto;
     }
 
     .header {
@@ -155,6 +208,13 @@
 
     .vitals-table tbody tr:hover {
       background-color: #eef1f5;
+    }
+
+    .no-vitals {
+      text-align: center;
+      font-size: 18px;
+      color: #888;
+      padding: 50px 0;
     }
 
     @media (max-width: 480px) {
