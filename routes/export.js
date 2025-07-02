@@ -21,7 +21,8 @@ module.exports = () => {
             <input type="checkbox" name="params" value="heart_rate" checked> Heart Rate<br>
             <input type="checkbox" name="params" value="blood_pressure" checked> Blood Pressure<br>
             <input type="checkbox" name="params" value="temperature" checked> Temperature<br>
-            <input type="checkbox" name="params" value="weight_lbs" checked> Weight<br><br>
+            <input type="checkbox" name="params" value="weight_lbs" checked> Weight<br>
+            <input type="checkbox" name="params" value="blood_oxygen" checked> Blood Oxygen<br><br>
             <button type="submit">Export</button>
           </form>
         </div>
