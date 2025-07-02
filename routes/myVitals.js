@@ -16,6 +16,7 @@ module.exports = (db) => {
       const bloodPressures = [];
       const temperatures = [];
       const weights = [];
+      const bloodOxygens = [];
 
       chartResults.forEach(row => {
         const d = new Date(row.date);
@@ -34,11 +35,12 @@ module.exports = (db) => {
         bloodPressures.push(row.blood_pressure);
         temperatures.push(row.temperature);
         weights.push(row.weight_lbs);
+        bloodOxygens.push(row.blood_oxygen);
       });
 
       let tableBody = '';
       if (results.length === 0) {
-        tableBody = `<tr><td colspan="5" class="no-vitals">No vitals found.</td></tr>`;
+        tableBody = `<tr><td colspan="6" class="no-vitals">No vitals found.</td></tr>`;
       } else {
         const displayResults = results.slice(0, 5);
         tableBody = displayResults.map(row => {
@@ -67,6 +69,7 @@ module.exports = (db) => {
                 ${row.weight_lbs} lbs<br>
                 <span style="font-size: 0.85em; color: #666;">(${weightKg} kg)</span>
               </td>
+              <td>${row.blood_oxygen ?? ''}</td>
             </tr>
           `;
         }).join('');
@@ -79,6 +82,7 @@ module.exports = (db) => {
           const temperatures = ${JSON.stringify(temperatures)};
           const weights = ${JSON.stringify(weights)};
           const bloodPressures = ${JSON.stringify(bloodPressures)};
+          const bloodOxygens = ${JSON.stringify(bloodOxygens)};
           const systolic = bloodPressures.map(bp => parseInt((bp||'').split('/')[0]) || null);
           const diastolic = bloodPressures.map(bp => parseInt((bp||'').split('/')[1]) || null);
 
@@ -132,6 +136,15 @@ module.exports = (db) => {
                   yAxisID: 'y3',
                   spanGaps: true,
                   tension: 0.4
+                },
+                {
+                  label: 'Blood Oxygen (%)',
+                  data: bloodOxygens,
+                  borderColor: '#00b894',
+                  backgroundColor: 'rgba(0, 184, 148, 0.2)',
+                  yAxisID: 'y4',
+                  spanGaps: true,
+                  tension: 0.4
                 }
               ]
             },
@@ -144,7 +157,8 @@ module.exports = (db) => {
                 y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Heart Rate' } },
                 y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Temperature' }, grid: { drawOnChartArea: false } },
                 y2: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Weight' }, grid: { drawOnChartArea: false }, offset: true },
-                y3: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Blood Pressure' }, grid: { drawOnChartArea: false }, offset: true }
+                y3: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Blood Pressure' }, grid: { drawOnChartArea: false }, offset: true },
+                y4: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Blood Oxygen' }, grid: { drawOnChartArea: false }, offset: true }
               }
             }
           });
@@ -184,6 +198,7 @@ module.exports = (db) => {
                       <th>Blood Pressure</th>
                       <th>Temperature</th>
                       <th>Weight</th>
+                      <th>Blood Oxygen</th>
                     </tr>
                   </thead>
                   <tbody>

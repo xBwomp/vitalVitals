@@ -2,7 +2,7 @@ You can start the app with `npm start`.
 =======
 # Vital Vitals
 
-A small Node.js application for recording blood pressure and other health metrics. It allows you to sign in with Google, log your vitals and export them as CSV for your doctor.
+A small Node.js application for recording blood pressure and other health metrics such as heart rate, temperature, weight and blood oxygen. It allows you to sign in with Google, log your vitals and export them as CSV for your doctor.
 
 ## Installation
 
@@ -47,3 +47,11 @@ The application relies on several environment variables. They can be configured 
 3. Add new vitals in the dashboard and review or export them from the history page.
 
 The app is intentionally simple and meant as a personal health tracker that can export your records in CSV format.
+
+## Database Changes
+
+To store blood oxygen values for existing installations, add the column below to your `vitals` table:
+
+```sql
+ALTER TABLE vitals ADD COLUMN blood_oxygen DECIMAL(5,2);
+```
