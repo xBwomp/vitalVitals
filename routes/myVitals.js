@@ -8,7 +8,11 @@ module.exports = (db) => {
 
     try {
       const userId = req.user.id || req.user.emails?.[0]?.value;
-      const [results] = await db.query('SELECT * FROM vitals WHERE userId = ? ORDER BY date DESC', [userId]);
+      // Fetch only the last 30 days of records for the logged in user
+      const [results] = await db.query(
+        'SELECT * FROM vitals WHERE userId = ? AND date >= DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY date DESC',
+        [userId]
+      );
 
       const chartResults = results.slice(0, 25);
       const dates = [];
@@ -42,8 +46,7 @@ module.exports = (db) => {
       if (results.length === 0) {
         tableBody = `<tr><td colspan="6" class="no-vitals">No vitals found.</td></tr>`;
       } else {
-        const displayResults = results.slice(0, 5);
-        tableBody = displayResults.map(row => {
+        tableBody = results.map(row => {
           const d = new Date(row.date);
           const mm = String(d.getMonth() + 1).padStart(2, '0');
           const dd = String(d.getDate()).padStart(2, '0');
