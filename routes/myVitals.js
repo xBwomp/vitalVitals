@@ -72,7 +72,7 @@ module.exports = (db) => {
                 ${row.weight_lbs} lbs<br>
                 <span style="font-size: 0.85em; color: #666;">(${weightKg} kg)</span>
               </td>
-              <td>${row.blood_oxygen ?? ''}</td>
+              <td title="O₂ Saturation">${row.blood_oxygen ?? ''}</td>
             </tr>
           `;
         }).join('');
@@ -141,7 +141,7 @@ module.exports = (db) => {
                   tension: 0.4
                 },
                 {
-                  label: 'Blood Oxygen (%)',
+                  label: 'O₂ Saturation (%)',
                   data: bloodOxygens,
                   borderColor: '#00b894',
                   backgroundColor: 'rgba(0, 184, 148, 0.2)',
@@ -161,7 +161,7 @@ module.exports = (db) => {
                 y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Temperature' }, grid: { drawOnChartArea: false } },
                 y2: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Weight' }, grid: { drawOnChartArea: false }, offset: true },
                 y3: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Blood Pressure' }, grid: { drawOnChartArea: false }, offset: true },
-                y4: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Blood Oxygen' }, grid: { drawOnChartArea: false }, offset: true }
+                y4: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'O₂ Saturation' }, grid: { drawOnChartArea: false }, offset: true }
               }
             }
           });
@@ -201,7 +201,7 @@ module.exports = (db) => {
                       <th>Blood Pressure</th>
                       <th>Temperature</th>
                       <th>Weight</th>
-                      <th>Blood Oxygen</th>
+                      <th>O₂ Saturation</th>
                     </tr>
                   </thead>
                   <tbody>
