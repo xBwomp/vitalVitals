@@ -2,7 +2,7 @@
   "name": "vitalvitals",
   "version": "1.0.0",
   "description": "A small Node.js application for recording blood pressure and other health metrics. It allows you to sign in with Google, log your vitals and export them as CSV for your doctor.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
