@@ -2,3 +2,4 @@ stderr.log
 node_modules/
 .env
 tmp/
+vitals-error.log
