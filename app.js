@@ -37,6 +37,7 @@ const logoutRouter = require('./routes/logout')();
 const dashboardRouter = require('./routes/dashboard')();
 const saveRouter = require('./routes/save')(db);
 const myVitalsRouter = require('./routes/myVitals')(db);
+const chartRouter = require('./routes/chart')(db);
 const exportRouter = require('./routes/export')();
 const exportDownloadRouter = require('./routes/exportDownload')(db);
 
@@ -47,6 +48,7 @@ app.use('/vitals', logoutRouter);
 app.use('/vitals', dashboardRouter);
 app.use('/vitals', saveRouter);
 app.use('/vitals', myVitalsRouter);
+app.use('/vitals', chartRouter);
 app.use('/vitals', exportRouter);
 app.use('/vitals', exportDownloadRouter);
 
