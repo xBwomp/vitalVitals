@@ -1,6 +1,40 @@
 const express = require('express');
 const renderPage = require('../views/renderPage');
 
+function parseBloodPressure(bp) {
+  const [systolicRaw, diastolicRaw] = String(bp || '').split('/');
+  const systolic = Number.parseInt(systolicRaw, 10);
+  const diastolic = Number.parseInt(diastolicRaw, 10);
+
+  return {
+    systolic: Number.isNaN(systolic) ? null : systolic,
+    diastolic: Number.isNaN(diastolic) ? null : diastolic
+  };
+}
+
+function average(values) {
+  const validValues = values.filter(value => typeof value === 'number' && !Number.isNaN(value));
+  if (validValues.length === 0) return '—';
+  return (validValues.reduce((sum, value) => sum + value, 0) / validValues.length).toFixed(1);
+}
+
+function buildAverageCard(label, records) {
+  const parsedPressures = records.map(row => parseBloodPressure(row.blood_pressure));
+
+  return `
+    <div class="avg-card">
+      <h3>${label}</h3>
+      <ul>
+        <li><strong>Heart Rate:</strong> ${average(records.map(row => Number(row.heart_rate)))} bpm</li>
+        <li><strong>Blood Pressure:</strong> ${average(parsedPressures.map(bp => bp.systolic))}/${average(parsedPressures.map(bp => bp.diastolic))}</li>
+        <li><strong>Temperature:</strong> ${average(records.map(row => Number(row.temperature)))} °F</li>
+        <li><strong>Weight:</strong> ${average(records.map(row => Number(row.weight_lbs)))} lbs</li>
+        <li><strong>O₂ Saturation:</strong> ${average(records.map(row => Number(row.blood_oxygen)))}%</li>
+      </ul>
+    </div>
+  `;
+}
+
 module.exports = (db) => {
   const router = express.Router();
   router.get('/my-vitals', async (req, res) => {
@@ -13,6 +47,17 @@ module.exports = (db) => {
         'SELECT * FROM vitals WHERE userId = ? AND date >= DATE_SUB(NOW(), INTERVAL 90 DAY) ORDER BY date DESC',
         [userId]
       );
+
+      const now = Date.now();
+      const lastSevenDays = results.filter(row => (now - new Date(row.date).getTime()) <= (7 * 24 * 60 * 60 * 1000));
+      const lastThirtyDays = results.filter(row => (now - new Date(row.date).getTime()) <= (30 * 24 * 60 * 60 * 1000));
+      const averageCards = `
+        <div class="avg-cards">
+          ${buildAverageCard('Last 5 Entries Average', results.slice(0, 5))}
+          ${buildAverageCard('7 Day Average', lastSevenDays)}
+          ${buildAverageCard('30 Day Average', lastThirtyDays)}
+        </div>
+      `;
 
       let tableBody = '';
       if (results.length === 0) {
@@ -60,6 +105,7 @@ module.exports = (db) => {
               <span role="img" aria-label="Export">📄</span>
             </a>
           </div>
+          ${averageCards}
           <div class="card">
             <div class="card-header">
               <h2>Recent Entries</h2>
