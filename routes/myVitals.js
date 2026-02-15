@@ -18,18 +18,36 @@ function average(values) {
   return (validValues.reduce((sum, value) => sum + value, 0) / validValues.length).toFixed(1);
 }
 
+function highest(values) {
+  const validValues = values.filter(value => typeof value === 'number' && !Number.isNaN(value));
+  if (validValues.length === 0) return '—';
+  return Math.max(...validValues).toFixed(1);
+}
+
+function lowest(values) {
+  const validValues = values.filter(value => typeof value === 'number' && !Number.isNaN(value));
+  if (validValues.length === 0) return '—';
+  return Math.min(...validValues).toFixed(1);
+}
+
+function metricSummary(values, unit) {
+  return `${average(values)}${unit} (H: ${highest(values)}${unit}, L: ${lowest(values)}${unit})`;
+}
+
 function buildAverageCard(label, records) {
   const parsedPressures = records.map(row => parseBloodPressure(row.blood_pressure));
+  const systolicValues = parsedPressures.map(bp => bp.systolic);
+  const diastolicValues = parsedPressures.map(bp => bp.diastolic);
 
   return `
     <div class="avg-card">
       <h3>${label}</h3>
       <ul>
-        <li><strong>Heart Rate:</strong> ${average(records.map(row => Number(row.heart_rate)))} bpm</li>
-        <li><strong>Blood Pressure:</strong> ${average(parsedPressures.map(bp => bp.systolic))}/${average(parsedPressures.map(bp => bp.diastolic))}</li>
-        <li><strong>Temperature:</strong> ${average(records.map(row => Number(row.temperature)))} °F</li>
-        <li><strong>Weight:</strong> ${average(records.map(row => Number(row.weight_lbs)))} lbs</li>
-        <li><strong>O₂ Saturation:</strong> ${average(records.map(row => Number(row.blood_oxygen)))}%</li>
+        <li><strong>Heart Rate:</strong> ${metricSummary(records.map(row => Number(row.heart_rate)), ' bpm')}</li>
+        <li><strong>Blood Pressure:</strong> ${average(systolicValues)}/${average(diastolicValues)} (H: ${highest(systolicValues)}/${highest(diastolicValues)}, L: ${lowest(systolicValues)}/${lowest(diastolicValues)})</li>
+        <li><strong>Temperature:</strong> ${metricSummary(records.map(row => Number(row.temperature)), ' °F')}</li>
+        <li><strong>Weight:</strong> ${metricSummary(records.map(row => Number(row.weight_lbs)), ' lbs')}</li>
+        <li><strong>O₂ Saturation:</strong> ${metricSummary(records.map(row => Number(row.blood_oxygen)), '%')}</li>
       </ul>
     </div>
   `;
