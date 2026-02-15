@@ -8,18 +8,41 @@ module.exports = () => {
 
     const content = `
       <div class="container">
-        <div class="header">
-          <h1>📝 Add New Vitals</h1>
-          <p>Enter your latest health metrics below.</p>
+        <div class="header retro-header">
+          <h1>🚀 Add New Vitals</h1>
+          <p>Atomic age styling, modern comfort. Log your stats from any device.</p>
         </div>
-        <div class="form-container">
-          <form action="/vitals/save" method="POST">
-            <input id="datetime" type="text" name="date" required><br>
-            <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)"><br>
-            <input type="text" name="blood_pressure" placeholder="Blood Pressure (e.g., 120/80)"><br>
-            <input type="number" step="0.1" name="temperature" placeholder="Temperature (°F)"><br>
-            <input type="number" step="0.1" name="weight_lbs" placeholder="Weight (lbs)"><br>
-            <input type="number" step="0.1" name="blood_oxygen" placeholder="O₂ Saturation (%)"><br>
+        <div class="form-container retro-form-shell">
+          <form class="retro-form" action="/vitals/save" method="POST">
+            <div class="form-group">
+              <label for="datetime">Date &amp; Time</label>
+              <input id="datetime" type="text" name="date" required>
+            </div>
+
+            <div class="form-group">
+              <label for="heart_rate">Heart Rate</label>
+              <input id="heart_rate" type="number" name="heart_rate" placeholder="Beats per minute">
+            </div>
+
+            <div class="form-group">
+              <label for="blood_pressure">Blood Pressure</label>
+              <input id="blood_pressure" type="text" name="blood_pressure" placeholder="120/80">
+            </div>
+
+            <div class="form-group">
+              <label for="temperature">Temperature</label>
+              <input id="temperature" type="number" step="0.1" name="temperature" placeholder="°F">
+            </div>
+
+            <div class="form-group">
+              <label for="weight_lbs">Weight</label>
+              <input id="weight_lbs" type="number" step="0.1" name="weight_lbs" placeholder="lbs">
+            </div>
+
+            <div class="form-group">
+              <label for="blood_oxygen">O₂ Saturation</label>
+              <input id="blood_oxygen" type="number" step="0.1" name="blood_oxygen" placeholder="%">
+            </div>
 
 	    <div class="button-container">
               <button type="submit" id="submitBtn">
@@ -34,18 +57,10 @@ module.exports = () => {
         flatpickr("#datetime", {
           enableTime: true,
           dateFormat: "Y-m-d H:i",
+          defaultDate: "now",
+          time_24hr: true,
         });
       </script>
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dtInput = document.getElementById('datetime');
-    if (dtInput && !dtInput.value) {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
-      dtInput.value = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:mm"
-    }
-  });
-</script>
 
     `;
     res.send(renderPage(content, req.user));

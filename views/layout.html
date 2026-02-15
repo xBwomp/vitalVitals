@@ -16,10 +16,14 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Trebuchet MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at top left, #3f0f7b 0%, rgba(63, 15, 123, 0) 42%),
+        radial-gradient(circle at top right, #004c7a 0%, rgba(0, 76, 122, 0) 42%),
+        linear-gradient(160deg, #120525 0%, #1b2d4e 52%, #203f54 100%);
       min-height: 100vh;
       padding: 20px;
+      color: #f3fbff;
     }
 
     .topbar-flex {
@@ -29,114 +33,79 @@
       margin-bottom: 20px;
       color: white;
       flex-wrap: wrap;
+      gap: 10px;
     }
 
     .nav-links a,
     .auth-links a {
-      color: white;
+      color: #d8f8ff;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       margin-right: 20px;
     }
 
     .auth-links a {
       margin-left: 15px;
+      margin-right: 0;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 20px;
     }
 
     .header {
+      background: linear-gradient(140deg, rgba(0, 255, 222, 0.18), rgba(255, 106, 0, 0.18));
+      border: 1px solid rgba(131, 248, 255, 0.45);
+      border-radius: 20px;
+      box-shadow: 0 0 22px rgba(52, 235, 255, 0.25);
+      padding: 28px 20px;
       text-align: center;
-      margin-bottom: 30px;
+      color: #fff;
+      margin-bottom: 24px;
     }
 
     .header h1 {
-      font-size: 36px;
+      font-size: 30px;
       font-weight: 700;
-      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(99, 247, 255, 0.5);
     }
 
     .header p {
-      font-size: 18px;
-      color: #eee;
-    }
-
-    .export-link,
-    .chart-link {
-      display: inline-block;
       margin-top: 10px;
-      font-size: 1.2em;
-      text-decoration: none;
-      color: #fff;
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: 10px 15px;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    .export-link:hover,
-    .chart-link:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-header {
-      padding: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .card-header h2 {
-      font-size: 24px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .card-body {
-      padding: 20px;
-    }
-
-    .table-container {
-      max-height: 250px; /* show roughly 5 rows before scrolling */
-      overflow-y: auto;
-    }
-
-    .header {
-      <!-- background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -->
-      background: linear-gradient(to left, #00c6ff, #0072ff);
-      padding: 30px 20px;
-      text-align: center;
-      color: white;
-    }
-
-    .header h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .header p {
-      opacity: 0.9;
-      font-size: 16px;
+      font-size: 15px;
+      color: #d4f6ff;
     }
 
     .form-container {
-      padding: 30px;
-      justify-content: center;
-      align-items: center;
+      padding: 28px;
+      background: linear-gradient(165deg, rgba(9, 24, 40, 0.9), rgba(36, 17, 68, 0.9));
+      border: 1px solid rgba(134, 255, 244, 0.45);
+      border-radius: 20px;
+      box-shadow: 0 0 26px rgba(77, 217, 255, 0.2);
     }
 
-    .form-group {
-      margin-bottom: 18px;
+    .retro-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .retro-form .form-group:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #93f8ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     input[type="text"],
@@ -148,29 +117,57 @@
       width: 100%;
       padding: 14px 16px;
       font-size: 16px;
-      border-radius: 10px;
-      border: none;
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
+      border-radius: 12px;
+      border: 1px solid rgba(114, 243, 255, 0.55);
+      background: linear-gradient(180deg, rgba(239, 253, 255, 0.98), rgba(218, 255, 247, 0.95));
+      color: #14253a;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45), 0 6px 16px rgba(2, 14, 33, 0.28);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
 
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 3px rgba(129, 239, 255, 0.32), 0 10px 20px rgba(0, 0, 0, 0.25);
     }
 
-    .submit-btn:active {
-      transform: translateY(0);
+    .button-container {
+      text-align: right;
+      padding-top: 8px;
+      grid-column: 1 / -1;
+    }
+
+    #submitBtn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      border: 1px solid rgba(150, 245, 255, 0.8);
+      color: white;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0, 114, 255, 0.3);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    #submitBtn:hover {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      transform: scale(1.05);
     }
 
     a {
-      color: #4facfe;
+      color: #8be9ff;
       font-weight: 600;
       text-decoration: none;
     }
 
-    /* Styled vitals table */
     .table-container {
+      max-height: 250px;
+      overflow-y: auto;
       overflow-x: auto;
       margin-top: 20px;
     }
@@ -207,10 +204,9 @@
     .no-vitals {
       text-align: center;
       font-size: 18px;
-      color: #888;
+      color: #c2d6e6;
       padding: 50px 0;
     }
-
 
     .avg-cards {
       display: grid;
@@ -244,6 +240,7 @@
       .vitals-table thead {
         display: none;
       }
+
       .vitals-table,
       .vitals-table tbody,
       .vitals-table tr,
@@ -251,14 +248,17 @@
         display: block;
         width: 100%;
       }
+
       .vitals-table tr {
         margin-bottom: 15px;
       }
+
       .vitals-table td {
         text-align: right;
         padding-left: 50%;
         position: relative;
       }
+
       .vitals-table td::before {
         content: attr(data-label);
         position: absolute;
@@ -271,72 +271,36 @@
     }
 
     @media (max-width: 480px) {
-      .form-row {
-        flex-direction: column;
-        gap: 0;
+      .container {
+        padding: 12px;
       }
 
-      .form-row .form-group {
-        margin-bottom: 20px;
-      }
-    }
-      .topbar-flex {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        color: white;
-        flex-wrap: wrap;
+      .form-container {
+        padding: 18px;
       }
 
-      .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        margin-right: 20px;
+      .retro-form {
+        grid-template-columns: 1fr;
       }
 
-      .auth-links a {
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        margin-left: 15px;
-      }
-
+      .retro-form .form-group:first-child,
       .button-container {
-        text-align: right;
-        padding: 16px; /* or use margin-top to add spacing from inputs */
+        grid-column: auto;
       }
-
 
       #submitBtn {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: white;
-      padding: 12px 28px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(0, 114, 255, 0.3);
-      transition: background 0.3s ease, transform 0.2s ease;
+        width: 100%;
+      }
     }
-    
-    #submitBtn:hover {
-      background: linear-gradient(to right, #0072ff, #00c6ff);
-      transform: scale(1.05);
-    }
-    
-    #submitBtn::after {
-      content: "";
+
+    .ripple {
       position: absolute;
       border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
       transform: scale(0);
       animation: ripple 0.6s linear;
-      background: rgba(255, 255, 255, 0.5);
-    }  
+      pointer-events: none;
+    }
 
     @keyframes ripple {
       to {
@@ -356,7 +320,6 @@
       {{authLinks}}
     </div>
   </div>
-  
 
   {{content}}
 
@@ -365,8 +328,12 @@
     const dtInput = document.getElementById('datetime');
     if (dtInput && !dtInput.value) {
       const now = new Date();
-      now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // adjust for timezone
-      dtInput.value = now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:mm"
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      dtInput.value = `${year}-${month}-${day} ${hours}:${minutes}`;
     }
   });
 </script>
@@ -379,7 +346,6 @@
       btn.querySelector('.btn-text').textContent = 'Submitting...';
       btn.querySelector('.btn-spinner').style.display = 'inline-block';
 
-      // Ripple effect
       const circle = document.createElement("span");
       const diameter = Math.max(btn.clientWidth, btn.clientHeight);
       const radius = diameter / 2;
@@ -393,24 +359,6 @@
     });
   }
 </script>
-
-<style>
-  .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    pointer-events: none;
-  }
-
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
-  }
-</style>
 
 </body>
 </html>
